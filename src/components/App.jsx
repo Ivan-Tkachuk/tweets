@@ -11,16 +11,22 @@ import Button from './Button/Button';
 export const App = () => {
 
   const [tweetsCards, setTweetsCards] = useState([]);
-  const [totalPages, setTotalPages] = useState(0);
+  // const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
+  const [hasMorePages, setHasMorePages] = useState(true);
 
   useEffect(() => {
     try {
       getTweetsCards(page).then(data => {
         setTweetsCards(prevTweetsCards => [...prevTweetsCards, ...data]);
         // setTweetsCards(data);
-        setTotalPages(Math.floor(data.length / 9));
+        // setTotalPages(Math.floor(data.length / 9));
+        if (data.length === 0) {
+          setHasMorePages(false);
+        }
+
         console.log(data);
+        console.log(data.length);
         console.log(page);
       });
     } catch (error) {
@@ -65,9 +71,14 @@ export const App = () => {
   </ul>
   {/* <button type='button' onClick={handleLoad}>Load more</button> */}
 
-  {tweetsCards.length > 0 && page <= totalPages && (
+
+  {tweetsCards.length > 0 && hasMorePages && (
         <Button text="Load more" onClick={handleLoad}></Button>
       )}
+
+  {/* {tweetsCards.length > 0 && page <= totalPages && (
+        <Button text="Load more" onClick={handleLoad}></Button>
+      )} */}
 
   {/* {searchItem.length > 0 && !isLoading && page <= totalPages && (
         <Button text="Load more" onClick={handleLoad}></Button>
