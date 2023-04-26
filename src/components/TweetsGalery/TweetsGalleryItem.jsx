@@ -18,8 +18,6 @@ const TweetsGalleryItem = ({ card, onClick, initialFollowers, isFollowed }) => {
 
   const handleFollowClick = () => {
     onClick(user, isFollowed);
-    console.log(isFollowed);
-    console.log(initialFollowers);
   };
 
   return (
