@@ -14,7 +14,10 @@ const TweetsGalleryItem = ({ card, onClick, initialFollowers, isFollowed }) => {
 
   const handleFollowClick = () => {
     onClick(user, isFollowed);
-    console.log(isFollowed); // передаем user и текущее состояние isFollowed в родительский компонент
+    console.log(isFollowed);
+    console.log(initialFollowers);
+    
+     // передаем user и текущее состояние isFollowed в родительский компонент
   };
 
 
@@ -25,7 +28,9 @@ const TweetsGalleryItem = ({ card, onClick, initialFollowers, isFollowed }) => {
         alt={user}
       />
       <p>{new Intl.NumberFormat('en-US').format(tweets)} tweets</p>
-      <p>{isFollowed[user] ? (initialFollowers[user] + 1) : (initialFollowers[user])} followers</p>
+      <p>{isFollowed[user] ? new Intl.NumberFormat('en-US').format(initialFollowers[user] + 1) 
+      : new Intl.NumberFormat('en-US').format(initialFollowers[user])} followers old</p>
+ <p>{new Intl.NumberFormat('en-US').format(initialFollowers[user])} followers new</p>
       <button
         type='button'
         onClick={handleFollowClick}>
